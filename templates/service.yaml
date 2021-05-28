@@ -117,9 +117,8 @@ Resources:
         - Name: simple-app
           Image: !Sub ${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/${Repository}:${Tag}
           EntryPoint:
-            - /usr/sbin/apache2
-            - -D
-            - FOREGROUND
+            - python
+            - app/main.py
           Essential: true
           Memory: 128
           MountPoints:

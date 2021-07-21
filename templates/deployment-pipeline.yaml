@@ -229,7 +229,7 @@ Resources:
                 - echo -n "$CODEBUILD_LOG_PATH" > /tmp/build_id.out
                 - printf "%s:%s" "$REPOSITORY_URI" "$(cat /tmp/build_id.out)" > /tmp/build_tag.out
                 - printf '{"tag":"%s"}' "$(cat /tmp/build_id.out)" > /tmp/build.json
-                - $(aws ecr get-login)
+                - aws ecr get-login-password | docker login -u AWS --password-stdin "https://$(aws sts get-caller-identity --query 'Account' --output text).dkr.ecr.us-east-1.amazonaws.com"
             build:
               commands:
                 - docker build --tag "$(cat /tmp/build_tag.out)" .
@@ -241,7 +241,7 @@ Resources:
             discard-paths: yes
       Environment:
         ComputeType: "BUILD_GENERAL1_SMALL"
-        Image: "aws/codebuild/docker:1.12.1"
+        Image: "aws/codebuild/standard:4.0"
         Type: "LINUX_CONTAINER"
         EnvironmentVariables:
           - Name: AWS_DEFAULT_REGION

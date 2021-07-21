@@ -242,7 +242,7 @@ Resources:
         ComputeType: "BUILD_GENERAL1_SMALL"
         Image: "aws/codebuild/standard:4.0"
         Type: "LINUX_CONTAINER"
-        PrivilegedMode: True
+        PrivilegedMode: true
         EnvironmentVariables:
           - Name: AWS_DEFAULT_REGION
             Value: !Ref AWS::Region

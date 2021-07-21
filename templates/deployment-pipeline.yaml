@@ -147,6 +147,9 @@ Resources:
                   - elasticloadbalancing:Describe*
                   - codepipeline:Get*
                   - codebuild:BatchGetBuilds
+                  - codeartifact:*
+                  - sts:GetServiceBearerToken
+                  - sts:GetCallerIdentity
               - Resource: !Sub arn:aws:s3:::${ArtifactBucket}/*
                 Effect: Allow
                 Action:
